@@ -1,4 +1,4 @@
-# Create your models here.
+# Create your models 
 from django.db import models
 
 class Plan(models.Model):
