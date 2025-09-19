@@ -12,6 +12,10 @@ class TrainerSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class MemberSerializer(serializers.ModelSerializer):
+    plan = PlanSerializer()        # nested
+    trainer = TrainerSerializer()  # nested
+
     class Meta:
         model = Member
         fields = '__all__'
+
