@@ -22,3 +22,4 @@ urlpatterns = [
     path('api/', include('gymapi.urls')),   # expose API
 ]
 
+
