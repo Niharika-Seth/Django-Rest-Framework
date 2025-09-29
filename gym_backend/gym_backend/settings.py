@@ -40,10 +40,12 @@ INSTALLED_APPS = [
     'rest_framework', 
     'rest_framework.authtoken',
     'django_filters',
+    'corsheaders',
     'gymapi',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware', 
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -51,6 +53,17 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+# CORS & CSRF setup for frontend-backend communication
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:8001",  # frontend server
+    "http://localhost:8001",  # optional if you use localhost
+]
+CSRF_TRUSTED_ORIGINS = [
+    "http://127.0.0.1:8001",
+    "http://localhost:8001",
 ]
 
 ROOT_URLCONF = 'gym_backend.urls'
@@ -128,7 +141,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.SessionAuthentication",  # works with Django login + CSRF
-        "rest_framework.authentication.TokenAuthentication",    # optional: for mobile/JS clients
+         #"rest_framework.authentication.TokenAuthentication",    # optional: for mobile/JS clients
     ],
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
