@@ -16,9 +16,16 @@ class MemberSerializer(serializers.ModelSerializer):
     plan = PlanSerializer(read_only=True)
     trainer = TrainerSerializer(read_only=True)
 
+    plan_id = serializers.PrimaryKeyRelatedField(
+        queryset=Plan.objects.all(), source='plan', write_only=True
+    )
+    trainer_id = serializers.PrimaryKeyRelatedField(
+        queryset=Trainer.objects.all(), source='trainer', write_only=True, allow_null=True, required=False
+    )
+
     class Meta:
         model = Member
-        fields = ['id', 'name', 'email', 'join_date', 'plan', 'trainer']
+        fields = ['id', 'name', 'email', 'join_date','plan', 'trainer', 'plan_id', 'trainer_id']
 
 
 
